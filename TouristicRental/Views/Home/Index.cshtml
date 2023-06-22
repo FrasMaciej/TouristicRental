@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Index";
+
+}
+@using TouristicRental.Areas.Identity.Pages.Account
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>To our touristic equipment rental. We have plenty of trekking, hiking, climbing and winter mountaineering gadgets.</p>
+    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    <p>
+        @if (!User.IsInRole("Client") && (!User.IsInRole("Worker")))
+        {
+            <a class="btn btn-lg btn-info" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+            <a class="btn btn-lg btn-success" asp-area="Identity" asp-page ="/Account/Register">Register</a>
+        }
+    </p>
+    <p>
+        @if (User.IsInRole("Client"))
+                        {
+                            <br />
+                            <a class="btn btn-lg btn-outline-light" asp-controller="Home" asp-action="ClientPanel">     Main panel      </a>
+                            <a class="btn btn-lg btn-danger" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+                        }
+        @if (User.IsInRole("Worker"))
+                        {
+                            <br />
+                            <a class="btn btn-lg btn-outline-light" asp-controller="Home" asp-action="WorkerPanel">     Main panel      </a>
+                            <a class="btn btn-lg btn-danger" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+                        }
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+    </p>
+</div>
+

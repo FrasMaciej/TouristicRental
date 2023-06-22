@@ -1,0 +1,76 @@
+﻿@model IEnumerable<TouristicRental.Models.Good>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Magazine</h2>
+<p>Here you can see all our equipment. Some of them may be not available right now.</h4>
+
+@if (User.IsInRole("Worker"))
+{
+    <p>
+        <a class="btn btn-success" asp-action="Create">Add new</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DailyPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsFree)
+            </th>
+            @if (User.IsInRole("Worker"))
+            {
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFree)
+            </td>
+            @if (User.IsInRole("Worker"))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImagePath)
+                        </td>
+
+                        <td>
+                            <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.GoodId">Edit</a> |
+                <a class="btn btn-sm btn-outline-light" asp-action="Details" asp-route-id="@item.GoodId">Details</a> |
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.GoodId">Delete</a>
+            </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

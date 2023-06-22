@@ -1,0 +1,46 @@
+﻿@model TouristicRental.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Make new order</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RentDate" class="control-label"></label>
+                <input asp-for="RentDate" class="form-control" />
+                <span asp-validation-for="RentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnDate" class="control-label"></label>
+                <input asp-for="ReturnDate" class="form-control" />
+                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+            </div>
+            @*<select asp-for="GoodFK" class="form-control" asp-items="ViewBag.Good"></select>*@
+            <div class="form-group">
+                <label>Good</label>
+                <select asp-for="GoodFK" class="form-control" asp-items="ViewBag.Good"></select>
+                <span asp-validation-for="GoodFK" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
+                <label asp-for="ClientFK" class="control-label"></label>
+                <input asp-for="ClientFK" class="form-control" />
+                <span asp-validation-for="ClientFK" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <p></p>
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a class="btn btn-outline-light" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div></p>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

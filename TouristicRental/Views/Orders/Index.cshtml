@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TouristicRental.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<h2>List of all orders</h2>
+@if (User.IsInRole("Client"))
+{
+    <p>
+        <a class="btn btn-success" asp-action="Create">Add new order</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isPaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isFinished)
+            </th>
+            @if (User.IsInRole(""))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.GoodFK)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClientFK)
+            </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReturnDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isPaid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isFinished)
+                    </td>
+                    @if (User.IsInRole(""))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GoodFK)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientFK)
+                        </td>
+                    }
+            <td>
+                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
+                <a class="btn btn-sm btn-outline-light" asp-action="Details" asp-route-id="@item.OrderId">Details</a> 
+                @*<a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

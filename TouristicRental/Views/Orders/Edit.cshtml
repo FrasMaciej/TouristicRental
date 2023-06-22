@@ -1,0 +1,68 @@
+﻿@model TouristicRental.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit order</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+           <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderId" />
+            <input type="hidden" asp-for="RentDate" />
+            <input type="hidden" asp-for="ReturnDate" />
+            <input type="hidden" asp-for="GoodFK" />
+            <input type="hidden" asp-for="ClientFK" />
+
+            @*<div class="form-group">
+                <label asp-for="RentDate" class="control-label"></label>
+                <input asp-for="RentDate" class="form-control" />
+                <span asp-validation-for="RentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnDate" class="control-label"></label>
+                <input asp-for="ReturnDate" class="form-control" />
+                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+            </div>*@
+            @if (User.IsInRole("Client"))
+            {
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" asp-for="isPaid" /> @Html.DisplayNameFor(model => model.isPaid)
+                </label>
+            </div>
+            }
+            @if (User.IsInRole("Worker"))
+            {
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" asp-for="isFinished" /> @Html.DisplayNameFor(model => model.isFinished)
+                </label>
+            </div>
+            }
+            @*<div class="form-group">
+                <label asp-for="GoodFK" class="control-label"></label>
+                <input asp-for="GoodFK" class="form-control" />
+                <span asp-validation-for="GoodFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientFK" class="control-label"></label>
+                <input asp-for="ClientFK" class="form-control" />
+                <span asp-validation-for="ClientFK" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <p></p>
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a class="btn btn-outline-light" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
